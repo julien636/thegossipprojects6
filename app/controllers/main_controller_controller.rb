@@ -1,4 +1,6 @@
 class MainControllerController < ApplicationController
+
+
   def team
   end
 
@@ -8,9 +10,11 @@ class MainControllerController < ApplicationController
   def welcome
 
   end
-  def index
+
+  def home
     @gossips=Gossip.all
   end
+
 
 end
  

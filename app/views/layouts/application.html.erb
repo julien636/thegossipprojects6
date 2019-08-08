@@ -11,49 +11,70 @@
 
   <title>The Gossip Book</title>
 
-  <!-- Font Awesome Icons -->
-  <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather+Sans:400,700" rel="stylesheet">
   <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
-
-  <!-- Plugin CSS -->
-  <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
 
   <!-- Theme CSS - Includes Bootstrap -->
 
   <%= stylesheet_link_tag "creative.min.css" %>
   <%= stylesheet_link_tag "styles.css" %>
+  <%= stylesheet_link_tag "all.min.css" %>
+  <%= stylesheet_link_tag "magnific-popup.css" %>
   
 </head>
 
 <body id="page-top">
 
+
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger"><%= link_to "GossipBook", index_path %></a>
+      
+      <a class="navbar-brand js-scroll-trigger" href="<%=home_path%>">GossipBook</a>
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <% if current_user%>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto my-2 my-lg-0">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger"><%= link_to "S'inscrire", team_path %></a>
+            <a class="nav-link js-scroll-trigger" href="<%=session_path(session[:user_id])%>"data-confirm="Etes-vous sur?" data-method="DELETE">Se deconnecter</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger"><%= link_to "Se Connecter", team_path %></a>
+            <a class="nav-link js-scroll-trigger" href="<%=team_path%>">Team</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger"><%= link_to "Team", team_path %></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger"><%= link_to "Contact", contact_path %></a>
+            <a class="nav-link js-scroll-trigger" href="<%=contact_path%>">Contact</a>
           </li>
         </ul>
       </div>
+      <%else%>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto my-2 my-lg-0">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<%=new_user_path%>">S'inscrire</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<%=new_session_path%>">Se Connecter</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<%=team_path%>">Team</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="<%=contact_path%>">Contact</a>
+          </li>
+        </ul>
+      </div>
+      <%end%>
     </div>
+      <% if flash[:notice] %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert"><%= flash[:notice] %>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+    </button>
+    </div>
+  <% end %>
   </nav>
 
 
@@ -68,15 +89,19 @@
   </footer>
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/jquery/jquery.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+ 
 
   <!-- Plugin JavaScript -->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+  <script src="/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/assets/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
 
   <!-- Custom scripts for this template -->
-  <script src="js/creative.min.js"></script>
+  <script src="/assets/js/creative.min.js"></script>
+  <%= javascript_include_tag :application%>
+  <%= csrf_meta_tags %>
+
 
 </body>
 

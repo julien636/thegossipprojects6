@@ -1,0 +1,57 @@
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <div class="container">
+            <div class="card text-center">
+              <div class="card-header">
+                 
+              </div>
+              <div class="card-body">
+                <h4 class="card-title"> Edite ton Gossip  </h4>
+                          <% if @gossip.errors.any? %>
+                            <div class="alert alert-danger" role="alert">
+                              <p>Nous n'avons pas réussi à modifier le potin pour la (ou les) raison(s) suivante(s) :</p>
+                              <ul>
+                                <% @gossip.errors.full_messages.each do |message| %>
+                                  <li><%= message %></li>
+                                <% end %>
+                              </ul>
+                            </div>
+                          <% end %>
+                <p class="card-text">   </p>
+                  <div class="text-muted">
+
+                    <%= form_for @gossip do |f| %>
+                      <div class="form-group">
+                      <label> Titre du Gossip </label>
+                      <%= f.text_field :title, class:'form-control'%>
+                      </div>
+                      <div class="form-group">
+                      <label> Contenu du Gossip </label>
+                      <%= f.text_field :content, class:'form-control'%>
+                      </div><br/>
+                      <div class="form-group">
+                      <button type='submit' class="btn btn-update"> Editer le Gossip </button>
+                      </div>
+                  </div>
+                      <%end%>
+
+                  </div>
+              <div class="card-footer text-muted">
+                2 days ago
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 font-weight-light mb-5"></p>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+

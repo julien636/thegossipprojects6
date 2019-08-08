@@ -1,0 +1,46 @@
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <h1 class="text-uppercase text-white font-weight-bold">GossipBook - What else?</h1>
+          <hr class="divider my-4">
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <h3 class="text-white-75 font-weight-light mb-5"><%if current_user %>Bienvenue <%=current_user.first_name%> !<%else%>Bienvenue!<%end%></h3>
+          <a class="btn btn-primary btn-xl js-scroll-trigger btn-update" href="#about">Find Out More (Ou pas!)</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- Services Section -->
+  <section class="page-section" id="services">
+    <div class="container">
+      <h2 class="text-center mt-0"><a href="/gossips/new/">Créer un gossip</a></h2><br>
+      <hr class="divider my-4"><br>
+      <h2 class='text-center mt-0'> Gossip du jour </h2><br>
+      <hr class="divider my-4"><br>
+      <div class="container d-flex flex-wrap justify-content-around">
+        <% @gossips.each_with_index do |gossip,index| %>
+            <div class="card mt-5" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title"><%= gossip.title.capitalize %><br/></h5>
+                <h6 class="card-subtitle mb-2 text-muted">Auteur : <%= gossip.user.first_name %><br/></h6><br/>
+                <p class="card-text"><%= gossip.content%></p><br/>
+                <h6 class="card-subtitle mb-2 text-muted"><%= gossip.comments.count %> commentaires<br/></h6>
+                <hr class="divider my-4"><br>
+                <a class="btn btn-primary btn-update" href="<%=gossip_path(gossip.id)%>" role="button">Voir</a>
+                <% if gossip.user == current_user %>
+                <a class="btn btn-success" href="<%=edit_gossip_path(gossip.id)%>" role="button">Editer</a>
+                <a class="btn btn-warning" href="<%=gossip_path(gossip.id)%>" role="button" data-confirm="Etes-vous sur?" data-method="DELETE" >Supprimer</a>
+                <%end%>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    </div>
+  </section>
+

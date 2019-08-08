@@ -1,0 +1,59 @@
+
+
+  <!-- Masthead -->
+  <header class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <div class="container">
+            <div class="card text-center">
+              <div class="card-header">
+                 <%= link_to "#{@gossips.user.first_name}", user_path(@gossips.user.id) %>
+              </div>
+              <div class="card-body">
+                <h4 class="card-title"><%=@gossips.title.capitalize %></h4>
+                <p class="card-text"><%= @gossips.content %></p>
+                <div class="text-muted">
+                  À : <%= link_to "#{@gossips.user.city.name}", city_path(@city.id) %>
+                </div><br/>
+                <%if @gossips.user.id==current_user %>
+                <a href="#" class="btn btn-update">Modifier le Gossip</a>
+                <%end%>
+              </div>
+              <div class="card-footer text-muted">
+              <%if current_user%>
+                <%= form_for @comment, :url => "/gossips/#{@gossips.id}/comments" do |f| %>
+
+                <div class="form-group">
+                  <%= label_tag 'Ajouter un commentaire' %><br /><br />
+                  <%= text_field_tag 'content', '', class: 'form-control' %>
+                  <br /> 
+                </div>
+
+                <button type='submit' class="btn btn-update"> Créer le commentaire </button><br/><br/>
+                
+
+                <%end%>
+                <%end%>
+
+                <% @gossips.comments.each do |comment| %>
+                  <tr>
+                    <td><%= User.find(comment.user_id).first_name %> : <%= comment.content %> 
+                    <%if comment.user_id==session[:user_id]%>
+                    <a href="<%=edit_gossip_comment_path(@gossips.id, comment.id)%>" role="button">Editer</a></td>
+                    <%end%><br/><br/>
+                  </tr> 
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+          <p class="text-white-75 font-weight-light mb-5"></p>
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+
