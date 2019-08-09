@@ -15,7 +15,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @newuser=User.new(password:params['password'],email:params['email'],age:params['age'],description:params['description'],last_name:params['last_name'],first_name:params['first_name'],city:City.find(1))
+    @newuser=User.new(password:params['password'],email:params['email'],age:params['age'],description:params['description'],last_name:params['last_name'],first_name:params['first_name'],city:City.find(2))
     if @newuser.save 
       flash[:notice] = "User successfully created"
       redirect_to new_session_path

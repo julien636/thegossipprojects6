@@ -12,12 +12,12 @@ require 'faker'
 end
   # Creation de 10 utilisateurs
 10.times do
-  User.create(city_id:City.find(rand(1..10)) ,first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, description:Faker::Lorem.sentence, email:Faker::Internet.email, age:rand(10..100),password:Faker::Name.last_name)
+  User.create(city_id:City.find(1) ,first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, description:Faker::Lorem.sentence, email:Faker::Internet.email, age:rand(10..100),password:Faker::Name.last_name)
 end
 # On crée une boucle pour "peupler" chaque ville
 i=1
 while i!=11 
-  User.find(i).update(city:City.find(rand(1..10)))
+  User.find(i).update(city:City.find(1))
   i=i+1
 end
   # Creation de 10 potins
@@ -39,7 +39,7 @@ end
 end
   # Creation de 10 comment de gossip
 10.times do
-  Comment.create(content:Faker::Lorem.sentence, user:User.find(rand(1..10)), commentable:Gossip.find(rand(1..10)))
+  Comment.create(content:Faker::Lorem.sentence, user:User.find(rand(1..10)), commentable:Gossip.find(rand(1..9)))
 
 end
   # Creation de 20 Like 
@@ -47,7 +47,7 @@ end
   i=1
   i=rand(1..2)
   if i==1
-    Like.create(user:User.find(rand(1..10)), gossip:Gossip.find(rand(1..10)))
+    Like.create(user:User.find(rand(1..10)), gossip:Gossip.find(rand(1..9)))
   else 
     Like.create(user:User.find(rand(1..10)), comment:Comment.find(rand(1..10)))
   end
@@ -60,7 +60,7 @@ end
   if i==1
     Comment.create(content:Faker::Lorem.sentence, user:User.find(rand(1..10)), commentable:Comment.find(rand(1..10)))
   else 
-    Comment.create(content:Faker::Lorem.sentence, user:User.find(rand(1..10)), commentable:Gossip.find(rand(1..10)))
+    Comment.create(content:Faker::Lorem.sentence, user:User.find(rand(1..10)), commentable:Gossip.find(rand(1..9)))
   end
 end
   
