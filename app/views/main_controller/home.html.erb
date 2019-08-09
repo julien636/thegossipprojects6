@@ -30,8 +30,24 @@
                 <h5 class="card-title"><%= gossip.title.capitalize %><br/></h5>
                 <h6 class="card-subtitle mb-2 text-muted">Auteur : <%= gossip.user.first_name %><br/></h6><br/>
                 <p class="card-text"><%= gossip.content%></p><br/>
-                <h6 class="card-subtitle mb-2 text-muted"><%= gossip.comments.count %> commentaires<br/></h6>
-                <hr class="divider my-4"><br>
+                <h6 class="card-subtitle mb-2 text-muted"><%= gossip.comments.count %> commentaires -
+                <%if current_user%>
+                  <%if like = gossip.pre_like(current_user)%>
+                    <%=gossip.likes.count%>
+                    <%= link_to "", gossip_like_path(gossip,like), method: :delete, class:"fas fa-thumbs-up"%>
+                  <%else%>
+                    <%=gossip.likes.count%>
+                    <%= link_to "", gossip_likes_path(gossip.id), method: :post, class:"far fa-thumbs-up"%>
+                  <%end%>
+                <%else%>
+                  <%=gossip.likes.count%>
+                  <%= link_to "", new_session_path, class:"far fa-thumbs-up"%>
+                <%end%>
+                </h6>
+                <hr class="divider my-4">
+                <% gossip.tag_gossip.each do |tag|%>
+                <%= link_to "##{tag.title}", tag_path(tag.id) %>
+                <%end%><br/><br/>
                 <a class="btn btn-primary btn-update" href="<%=gossip_path(gossip.id)%>" role="button">Voir</a>
                 <% if gossip.user == current_user %>
                 <a class="btn btn-success" href="<%=edit_gossip_path(gossip.id)%>" role="button">Editer</a>

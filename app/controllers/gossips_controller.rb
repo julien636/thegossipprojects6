@@ -3,9 +3,11 @@ class GossipsController < ApplicationController
   before_action :only_user, only: [:edit, :update, :destroy]
 
   def show
-    @gossips=Gossip.find(params['id'])
+    @gossips=Gossip.find(@id)
     @city=User.find(@gossips.user.id).city
     @comment=Comment.new
+    @id = params[:id]
+		@gossip = Gossip.all.find(@id)
   end
 
   def new

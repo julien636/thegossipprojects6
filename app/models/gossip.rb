@@ -6,5 +6,14 @@ class Gossip < ApplicationRecord
   has_many :tags, through: :table_join_tag_gossips
   has_many :comments, as: :commentable
   has_many :likes
+
+
+  def pre_like(user)
+    self.likes.find { |like| like.user_id == user.id}
+  end
+
+  def tag_gossip
+    self.tags
+  end
 end
  

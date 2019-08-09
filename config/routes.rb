@@ -7,10 +7,11 @@ Rails.application.routes.draw do
   get '/home', to: 'main_controller#home' 
   resources :gossips do
     resources :comments
+    resources :likes, only: [:new, :create, :destroy]
   end
   resources :users
   resources :cities
-  
+  resources :tags 
   resources :sessions, only: [:new, :create, :destroy]
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

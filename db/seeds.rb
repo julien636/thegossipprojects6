@@ -21,7 +21,7 @@ while i!=11
   i=i+1
 end
   # Creation de 10 potins
-10.times do
+15.times do
   Gossip.create(title:Faker::Lorem.word, content:Faker::Lorem.sentence,user:User.find(rand(1..10)))
 end
 
