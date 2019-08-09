@@ -6,13 +6,13 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
-  # Creation de 10 utilisateurs
-10.times do
-  User.create(first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, description:Faker::Lorem.sentence, email:Faker::Internet.email, age:rand(10..100))
-end
 # Creation de 10 villes
 10.times do
   City.create(name:Faker::Address.city, zipcode:Faker::Address.zip_code)
+end
+  # Creation de 10 utilisateurs
+10.times do
+  User.create(city_id:City.find(rand(1..10)) ,first_name:Faker::Name.first_name, last_name:Faker::Name.last_name, description:Faker::Lorem.sentence, email:Faker::Internet.email, age:rand(10..100),password:Faker::Name.last_name)
 end
 # On crée une boucle pour "peupler" chaque ville
 i=1
